@@ -1,0 +1,123 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Smart External API Documentation",
+    "version": "1.7.0",
+    "description": "Smart External API Documentation",
+    "contact": {
+      "name": "Q2 Smart"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://q2smart.q2ebanking.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "smart"
+    }
+  ],
+  "paths": {
+    "/smart/users/{user_id}/campaigns": {
+      "get": {
+        "summary": "Campaigns",
+        "description": "Returns a list of campaigns by user id.",
+        "operationId": "getSmartUsersUser_idCampaigns",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The desired user id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model_9"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "SMART"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Model_9": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Model_8"
+        },
+        "x-tags": [
+          "SMART"
+        ]
+      },
+      "Model_8": {
+        "title": "Model_8",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "click-target": {
+            "type": "string"
+          },
+          "created-date": {
+            "type": "string"
+          },
+          "end-date": {
+            "type": "string"
+          },
+          "is-union": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start-date": {
+            "type": "string"
+          },
+          "last-updated-date": {
+            "type": "string"
+          },
+          "trait-family": {
+            "type": "integer"
+          },
+          "user": {
+            "type": "integer"
+          },
+          "campaigns/campaign-status": {
+            "type": "integer"
+          },
+          "audience-segments": {
+            "$ref": ""
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,835 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Smart External API Documentation",
+    "version": "1.7.0",
+    "description": "Smart External API Documentation",
+    "contact": {
+      "name": "Q2 Smart"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://q2smart.q2ebanking.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "smart"
+    }
+  ],
+  "paths": {
+    "/smart/custom_audiences/{audience_id}": {
+      "get": {
+        "tags": [
+          "smart"
+        ],
+        "summary": "Returns a custom audience or list of custom audiences available to FI",
+        "description": "Returns a custom audience or list of custom audiences available to FI",
+        "operationId": "getSmartCustom_audiencesAudience_id",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "audience_id",
+            "in": "path",
+            "description": "Desired custom audience id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model_1"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "smart"
+        ],
+        "summary": "Removes a single custom audience, making it unavailable for future campaigns",
+        "description": "Removes a single custom audience, making it unavailable for future campaigns",
+        "operationId": "deleteSmartCustom_audiencesAudience_id",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "audience_id",
+            "in": "path",
+            "description": "Desired custom audience id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/smart/users/{user_id}/traits": {
+      "get": {
+        "tags": [
+          "smart"
+        ],
+        "summary": "Returns a list of traits by user id. This endpoint may not return all of a users traits in certain cases. Five separate sources of data are queried, and in the event one of those queries fail we still want to return some of the data. So we log that failure but still return every trait we can with a 200 response. With the exception of \"custom_audience.users\" category traits and \"traits.kv_traits\" category traits , the \"value\" field in the response array will be of type string. For \"traits.kv_traits\" the value can be any valid JSON. For the \"custom_audience.users\" trait the value is an object containing \"name\", \"id\" and \"description\".",
+        "description": "Returns a list of traits by user id. This endpoint may not return all of a users traits in certain cases. Five separate sources of data are queried, and in the event one of those queries fail we still want to return some of the data. So we log that failure but still return every trait we can with a 200 response. With the exception of \"custom_audience.users\" category traits and \"traits.kv_traits\" category traits , the \"value\" field in the response array will be of type string. For \"traits.kv_traits\" the value can be any valid JSON. For the \"custom_audience.users\" trait the value is an object containing \"name\", \"id\" and \"description\".",
+        "operationId": "getSmartUsersUser_idTraits",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "Desired users id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model_4"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/smart/users/{user_id}/campaigns": {
+      "get": {
+        "tags": [
+          "smart"
+        ],
+        "summary": "Returns a list of campaigns by user id.",
+        "description": "Returns a list of campaigns by user id.",
+        "operationId": "getSmartUsersUser_idCampaigns",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "Desired users id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model_9"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/smart/heuristic_traits/users/{user_id}/keys/{key}": {
+      "get": {
+        "tags": [
+          "smart"
+        ],
+        "summary": "Returns the value of a heuristic trait if it exists.",
+        "description": "Returns the value of a heuristic trait if it exists.",
+        "operationId": "getSmartHeuristic_traitsUsersUser_idKeysKey",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "description": "Name of key that is being requested",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "Desired users id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Should return the value corresponding to the key supplied in the uri",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "description": "Should return the value corresponding to the key supplied in the uri"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "smart"
+        ],
+        "summary": "Sets a value for a heuristic trait. The value for the key must match the configured type and schema.",
+        "description": "Sets a value for a heuristic trait. The value for the key must match the configured type and schema.",
+        "operationId": "postSmartHeuristic_traitsUsersUser_idKeysKey",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "description": "The name of the key you would like to create or update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "Desired users id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "the value to post",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Should return the payload on success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "description": "Should return the payload on success"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "smart"
+        ],
+        "summary": "Deletes given heuristic trait for the given user by id.",
+        "description": "Deletes given heuristic trait for the given user by id.",
+        "operationId": "deleteSmartHeuristic_traitsUsersUser_idKeysKey",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "description": "Name of key that is being requested",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "Desired users id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Should return an empty object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model_12"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "smart"
+        ],
+        "summary": "Sets a value for a heuristic trait for the given user. The value for the key must match the configured type and schema.",
+        "description": "Sets a value for a heuristic trait for the given user. The value for the key must match the configured type and schema.",
+        "operationId": "patchSmartHeuristic_traitsUsersUser_idKeysKey",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "description": "The name of the key you would like to create or update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "Desired users id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "the value to post",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Should return the payload on success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "description": "Should return the payload on success"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/smart/custom_audiences": {
+      "get": {
+        "tags": [
+          "smart"
+        ],
+        "summary": "Returns a custom audience or list of custom audiences available to FI",
+        "description": "Returns a custom audience or list of custom audiences available to FI",
+        "operationId": "getSmartCustom_audiences",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model_2"
+                },
+                "examples": {}
+              }
+            },
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "smart"
+        ],
+        "summary": "Upload an invalidated custom audience. An invalidated custom audience must be validated via SMART before it can be used in a campaign.",
+        "description": "Upload an invalidated custom audience.  An invalidated custom audience must be validated via SMART before it can be used in a campaign.",
+        "operationId": "postSmartCustom_audiences",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer {JWT}",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Model_30"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Model_1": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "ds-id": {
+            "type": "string"
+          },
+          "empty-audience": {
+            "type": "boolean"
+          },
+          "company": {
+            "type": "integer"
+          },
+          "audience-id-type": {
+            "type": "integer"
+          },
+          "user": {
+            "type": "integer"
+          },
+          "is-ds-loaded": {
+            "type": "boolean"
+          },
+          "is-validated": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Model_2": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Model_1"
+        }
+      },
+      "Model_3": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "x-alternatives": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/x-alt-definitions/value"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "producer": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "subType": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "user_traits": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Model_3"
+        }
+      },
+      "Model_4": {
+        "type": "object",
+        "properties": {
+          "aba": {
+            "type": "string"
+          },
+          "db": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "integer"
+          },
+          "user_traits": {
+            "$ref": "#/components/schemas/user_traits"
+          }
+        }
+      },
+      "Model_5": {
+        "type": "object",
+        "properties": {
+          "audience-trait-adjustments": {
+            "type": "integer"
+          }
+        }
+      },
+      "audience-trait-adjustments": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Model_5"
+        }
+      },
+      "campaigns_creative": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "image": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "width": {
+            "type": "integer"
+          },
+          "is-global": {
+            "type": "boolean"
+          },
+          "trait-family": {
+            "type": "integer"
+          },
+          "company": {
+            "type": "integer"
+          },
+          "ad-space": {
+            "type": "integer"
+          }
+        }
+      },
+      "Model_6": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": ""
+          },
+          "id": {
+            "type": "integer"
+          },
+          "token": {
+            "type": "string"
+          },
+          "audience-segment": {
+            "type": "integer"
+          },
+          "campaigns/creative": {
+            "$ref": "#/components/schemas/campaigns_creative"
+          }
+        }
+      },
+      "campaigns_audience-segment-creatives": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Model_6"
+        }
+      },
+      "Model_7": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": ""
+          },
+          "id": {
+            "type": "integer"
+          },
+          "is-filter": {
+            "type": "boolean"
+          },
+          "is-recommended": {
+            "type": "boolean"
+          },
+          "is-custom-audience": {
+            "type": "boolean"
+          },
+          "campaigns/campaign": {
+            "type": "integer"
+          },
+          "trait-family": {
+            "type": "integer"
+          },
+          "audience-trait-adjustments": {
+            "$ref": "#/components/schemas/audience-trait-adjustments"
+          },
+          "campaigns/audience-segment-creatives": {
+            "$ref": "#/components/schemas/campaigns_audience-segment-creatives"
+          }
+        }
+      },
+      "audience-segments": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Model_7"
+        }
+      },
+      "Model_8": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "click-target": {
+            "type": "string",
+            "example": ""
+          },
+          "created-date": {
+            "type": "string",
+            "example": ""
+          },
+          "end-date": {
+            "type": "string",
+            "example": ""
+          },
+          "is-union": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start-date": {
+            "type": "string",
+            "example": ""
+          },
+          "last-updated-date": {
+            "type": "string",
+            "example": ""
+          },
+          "trait-family": {
+            "type": "integer"
+          },
+          "user": {
+            "type": "integer"
+          },
+          "campaigns/campaign-status": {
+            "type": "integer"
+          },
+          "audience-segments": {
+            "$ref": "#/components/schemas/audience-segments"
+          }
+        },
+        "x-examples": {}
+      },
+      "Model_9": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Model_8"
+        }
+      },
+      "Model_12": {
+        "type": "object"
+      },
+      "Model_29": {
+        "type": "array",
+        "description": "list of strings containing users' information based on the provided audience_type",
+        "items": {
+          "type": "string"
+        }
+      },
+      "Model_30": {
+        "required": [
+          "audience_type",
+          "data",
+          "description",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "the name of the custom audience list"
+          },
+          "description": {
+            "type": "string",
+            "description": "description for custom audience list"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Model_29"
+          },
+          "audience_type": {
+            "type": "string",
+            "description": "Select the desired custom audience type:\n\n cif: Q2 Central's account group id\n\n email: user's email address\n\n login: user's UUX login username\n\n SSN: Social Security Number",
+            "enum": [
+              "cif",
+              "email",
+              "login",
+              "SSN"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "x-alt-definitions": {
+    "value": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
