@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Smart External API Documentation",
+    "title": "SMART APIs",
     "version": "1.7.0",
-    "description": "Smart External API Documentation",
+    "description": "SMART APIs Documentation",
     "contact": {
       "name": "Q2 Smart"
     }
@@ -21,11 +21,8 @@
   "paths": {
     "/smart/custom_audiences/{audience_id}": {
       "get": {
-        "tags": [
-          "smart"
-        ],
-        "summary": "Returns a custom audience or list of custom audiences available to FI",
-        "description": "Returns a custom audience or list of custom audiences available to FI",
+        "summary": "GET - Custom audience",
+        "description": "Returns a custom audience.",
         "operationId": "getSmartCustom_audiencesAudience_id",
         "parameters": [
           {
@@ -40,7 +37,7 @@
           {
             "name": "audience_id",
             "in": "path",
-            "description": "Desired custom audience id",
+            "description": "The desired custom audience id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -59,14 +56,14 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Custom audience"
+        ]
       },
       "delete": {
-        "tags": [
-          "smart"
-        ],
-        "summary": "Removes a single custom audience, making it unavailable for future campaigns",
-        "description": "Removes a single custom audience, making it unavailable for future campaigns",
+        "summary": "DELETE - Custom audience",
+        "description": "Removes a single custom audience. You cannot use this audience for a future campaign. ",
         "operationId": "deleteSmartCustom_audiencesAudience_id",
         "parameters": [
           {
@@ -81,7 +78,7 @@
           {
             "name": "audience_id",
             "in": "path",
-            "description": "Desired custom audience id",
+            "description": "The desired custom audience id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -99,16 +96,16 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Custom audience"
+        ]
       }
     },
     "/smart/users/{user_id}/traits": {
       "get": {
-        "tags": [
-          "smart"
-        ],
-        "summary": "Returns a list of traits by user id. This endpoint may not return all of a users traits in certain cases. Five separate sources of data are queried, and in the event one of those queries fail we still want to return some of the data. So we log that failure but still return every trait we can with a 200 response. With the exception of \"custom_audience.users\" category traits and \"traits.kv_traits\" category traits , the \"value\" field in the response array will be of type string. For \"traits.kv_traits\" the value can be any valid JSON. For the \"custom_audience.users\" trait the value is an object containing \"name\", \"id\" and \"description\".",
-        "description": "Returns a list of traits by user id. This endpoint may not return all of a users traits in certain cases. Five separate sources of data are queried, and in the event one of those queries fail we still want to return some of the data. So we log that failure but still return every trait we can with a 200 response. With the exception of \"custom_audience.users\" category traits and \"traits.kv_traits\" category traits , the \"value\" field in the response array will be of type string. For \"traits.kv_traits\" the value can be any valid JSON. For the \"custom_audience.users\" trait the value is an object containing \"name\", \"id\" and \"description\".",
+        "summary": "GET - Traits",
+        "description": "Returns a list of traits for a specific user id. \n\nNote: This endpoint may not return all traits in certain cases. \n\nWith the exception of \"custom_audience.users\" traits and \"traits.kv_traits\" traits, the \"value\" field in the response array will be of type string. \n\nFor the \"traits.kv_traits\" trait, the value can be any valid JSON. \n\nFor the \"custom_audience.users\" trait, the value is an object containing \"name\", \"id\", and \"description\".",
         "operationId": "getSmartUsersUser_idTraits",
         "parameters": [
           {
@@ -123,7 +120,7 @@
           {
             "name": "user_id",
             "in": "path",
-            "description": "Desired users id",
+            "description": "The desired user id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -141,16 +138,16 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Traits"
+        ]
       }
     },
     "/smart/users/{user_id}/campaigns": {
       "get": {
-        "tags": [
-          "smart"
-        ],
-        "summary": "Returns a list of campaigns by user id.",
-        "description": "Returns a list of campaigns by user id.",
+        "summary": "GET - Campaigns by user",
+        "description": "Returns a list of campaigns for a specific user id.",
         "operationId": "getSmartUsersUser_idCampaigns",
         "parameters": [
           {
@@ -165,7 +162,7 @@
           {
             "name": "user_id",
             "in": "path",
-            "description": "Desired users id",
+            "description": "The desired user id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -183,16 +180,16 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Campaigns by User"
+        ]
       }
     },
     "/smart/heuristic_traits/users/{user_id}/keys/{key}": {
       "get": {
-        "tags": [
-          "smart"
-        ],
-        "summary": "Returns the value of a heuristic trait if it exists.",
-        "description": "Returns the value of a heuristic trait if it exists.",
+        "summary": "GET - Heuristic traits",
+        "description": "Returns the value of a heuristic trait.",
         "operationId": "getSmartHeuristic_traitsUsersUser_idKeysKey",
         "parameters": [
           {
@@ -207,7 +204,7 @@
           {
             "name": "key",
             "in": "path",
-            "description": "Name of key that is being requested",
+            "description": "The name of the requested key",
             "required": true,
             "schema": {
               "type": "string"
@@ -216,7 +213,7 @@
           {
             "name": "user_id",
             "in": "path",
-            "description": "Desired users id",
+            "description": "The desired user id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -225,24 +222,24 @@
         ],
         "responses": {
           "200": {
-            "description": "Should return the value corresponding to the key supplied in the uri",
+            "description": "Returns the value corresponding to the key supplied in the uri",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "string",
-                  "description": "Should return the value corresponding to the key supplied in the uri"
+                  "description": "Returns the value corresponding to the key supplied in the uri"
                 }
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Heuristic traits"
+        ]
       },
       "post": {
-        "tags": [
-          "smart"
-        ],
-        "summary": "Sets a value for a heuristic trait. The value for the key must match the configured type and schema.",
-        "description": "Sets a value for a heuristic trait. The value for the key must match the configured type and schema.",
+        "summary": "POST - Heuristic trait",
+        "description": "Sets a value for a heuristic trait. \n\nThe value for the key must match the configured type and schema.",
         "operationId": "postSmartHeuristic_traitsUsersUser_idKeysKey",
         "parameters": [
           {
@@ -257,7 +254,7 @@
           {
             "name": "key",
             "in": "path",
-            "description": "The name of the key you would like to create or update",
+            "description": "The name of the key you want to create or update",
             "required": true,
             "schema": {
               "type": "string"
@@ -266,7 +263,7 @@
           {
             "name": "user_id",
             "in": "path",
-            "description": "Desired users id",
+            "description": "The desired user id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -274,7 +271,7 @@
           }
         ],
         "requestBody": {
-          "description": "the value to post",
+          "description": "The value to post",
           "content": {
             "application/json": {
               "schema": {
@@ -286,7 +283,7 @@
         },
         "responses": {
           "200": {
-            "description": "Should return the payload on success",
+            "description": "Returns the payload on success",
             "content": {
               "application/json": {
                 "schema": {
@@ -297,14 +294,14 @@
             }
           }
         },
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "Heuristic traits"
+        ]
       },
       "delete": {
-        "tags": [
-          "smart"
-        ],
-        "summary": "Deletes given heuristic trait for the given user by id.",
-        "description": "Deletes given heuristic trait for the given user by id.",
+        "summary": "DELETE - Heuristic traits",
+        "description": "Deletes a given heuristic trait for a specific user id.",
         "operationId": "deleteSmartHeuristic_traitsUsersUser_idKeysKey",
         "parameters": [
           {
@@ -319,7 +316,7 @@
           {
             "name": "key",
             "in": "path",
-            "description": "Name of key that is being requested",
+            "description": "The name of the requested key",
             "required": true,
             "schema": {
               "type": "string"
@@ -328,7 +325,7 @@
           {
             "name": "user_id",
             "in": "path",
-            "description": "Desired users id",
+            "description": "The desired user id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -337,7 +334,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Should return an empty object",
+            "description": "Returns an empty object",
             "content": {
               "application/json": {
                 "schema": {
@@ -346,14 +343,14 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Heuristic traits"
+        ]
       },
       "patch": {
-        "tags": [
-          "smart"
-        ],
-        "summary": "Sets a value for a heuristic trait for the given user. The value for the key must match the configured type and schema.",
-        "description": "Sets a value for a heuristic trait for the given user. The value for the key must match the configured type and schema.",
+        "summary": "PATCH - Heuristic trait",
+        "description": "Sets a value for a heuristic trait for the user. \n\nThe value for the key must match the configured type and schema.",
         "operationId": "patchSmartHeuristic_traitsUsersUser_idKeysKey",
         "parameters": [
           {
@@ -368,7 +365,7 @@
           {
             "name": "key",
             "in": "path",
-            "description": "The name of the key you would like to create or update",
+            "description": "The name of the key you want to create or update",
             "required": true,
             "schema": {
               "type": "string"
@@ -377,7 +374,7 @@
           {
             "name": "user_id",
             "in": "path",
-            "description": "Desired users id",
+            "description": "The desired user id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -385,7 +382,7 @@
           }
         ],
         "requestBody": {
-          "description": "the value to post",
+          "description": "The value to post",
           "content": {
             "application/json": {
               "schema": {
@@ -397,27 +394,27 @@
         },
         "responses": {
           "200": {
-            "description": "Should return the payload on success",
+            "description": "Returns the payload on success",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "string",
-                  "description": "Should return the payload on success"
+                  "description": "Returns the payload on success"
                 }
               }
             }
           }
         },
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "Heuristic traits"
+        ]
       }
     },
     "/smart/custom_audiences": {
       "get": {
-        "tags": [
-          "smart"
-        ],
-        "summary": "Returns a custom audience or list of custom audiences available to FI",
-        "description": "Returns a custom audience or list of custom audiences available to FI",
+        "summary": "GET - Custom audience list",
+        "description": "Returns a list of custom audiences.",
         "operationId": "getSmartCustom_audiences",
         "parameters": [
           {
@@ -443,14 +440,14 @@
             },
             "headers": {}
           }
-        }
+        },
+        "tags": [
+          "Custom audience"
+        ]
       },
       "post": {
-        "tags": [
-          "smart"
-        ],
-        "summary": "Upload an invalidated custom audience. An invalidated custom audience must be validated via SMART before it can be used in a campaign.",
-        "description": "Upload an invalidated custom audience.  An invalidated custom audience must be validated via SMART before it can be used in a campaign.",
+        "summary": "POST - Custom audience",
+        "description": "Uploads an unvalidated custom audience. \n\nYou must validate a custom audience in SMART before you can use it in a campaign.",
         "operationId": "postSmartCustom_audiences",
         "parameters": [
           {
@@ -471,7 +468,8 @@
               }
             }
           },
-          "required": false
+          "required": false,
+          "description": ""
         },
         "responses": {
           "200": {
@@ -485,7 +483,10 @@
             }
           }
         },
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "Custom audience"
+        ]
       }
     }
   },
