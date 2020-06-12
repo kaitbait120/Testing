@@ -1,4 +1,4 @@
-# Authentification
+# Authentication
 
 Before you can use one of the SMART APIs, you must first generate an API key. An API key is a unique code that is sent to an API to identify the calling application or user. The API key acts as an identifier or token for authentication. 
 
