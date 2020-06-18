@@ -11,7 +11,9 @@ Note: Generating a custom API key is only available for Q2 SMART customers with 
 3. In the **Nickname** field, enter a nickname for the API key. 
 4. Select **Generate key**. The key generates in the **API Key** field.
 5. Copy the generated key and save it in a secure place. 
-  Note: For security purposes, you will not be able to see the API key again once the window closes.
+
+Note: For security purposes, you will not be able to see the API key again once the window closes.
+
 6. Select **Close window**. 
 
 You can now send this API key with requests you make to the SMART APIs. 
